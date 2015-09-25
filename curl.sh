@@ -1171,7 +1171,7 @@ echo "[{
   "dmo" : ${IPHONE},
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "event" : "App Start",
+  "event" : 'App Start',
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
