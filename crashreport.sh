@@ -6,8 +6,8 @@ echo "CRASH DATA REPORT"
 echo " "
 
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
-URL=http://54.214.49.166
-COLLECTOR_URL=http://54.244.95.83:9001
+URL=
+COLLECTOR_URL=
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
 COLLECTORBID=81a9d6f577463cca8d8f0720e279d007
