@@ -207,9 +207,9 @@ do
   fi
 
   #OS models
-  iphone[1]="iPhone5"
-  iphone[0]="iPhone6"
-  iphone[2]="iPhone4"
+  iphone[1]="iPhone6,2"
+  iphone[0]="iPhone7,2"
+  iphone[2]="iPhone5,4"
 
   RANDOMIPHONEPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
   echo ${RANDOMIPHONEPER}
