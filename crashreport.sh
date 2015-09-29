@@ -143,6 +143,7 @@ elif [ "$RANDOMCONUNTRYPER" -ge "91" ] && [ "$RANDOMCONUNTRYPER" -le "95" ]; the
 elif [ "$RANDOMCONUNTRYPER" -ge "96" ] && [ "$RANDOMCONUNTRYPER" -le "100" ]; then
   COUNTRYNAME=${country[14]}
 fi
+COUNTRYNAME="United States"
 
 echo "${COUNTRYNAME}"
 
