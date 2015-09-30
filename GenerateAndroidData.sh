@@ -39,11 +39,12 @@ CARTURL+=/appdynamicspilot/rest/cart/
 
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
-COLLECTORBID=81a9d6f577463cca8d8f0720e279d007
+COLLECTORBID=7502603c73d32b0706f359bc8cfd1762
+COLLECTORAN=com.appdynamics.pmdemoapps.android.ECommerceAndroid
 COLLECTORKEY=DEMO-AAB-AXA
 COLLECTOREVENT=1
-COLLECTORAGENTVERSION=4.1.0.0
-COLLECTORAB=3861444463b35dce6e4b16e930e05a39ebc4a323
+COLLECTORAGENTVERSION=4.1.4.0
+COLLECTORAB=bd7bfaab131f9ead6cf916905f927f3e57cc38c2
 COLLECTORITEMSLISTACTIVITY=com.appdynamics.pmdemoapps.android.ECommerceAndroid.ItemListActivity
 COLLECTORLOGINACTIVITY=com.appdynamics.pmdemoapps.android.ECommerceAndroid.LoginActivity
 COLLECTORITEMPARSERACTIVITY=com.appdynamics.pmdemoapps.android.ECommerceAndroid.parser.ItemParser
@@ -305,18 +306,15 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"activity":'${COLLECTORLOGINACTIVITY}',"event":'App Start'},
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":"5.1",
-"ca":"Android","ct":"4g","bid":"adbac9fefff7fe75fcae02bbfc855b6b","ec":${COLLECTOREVENT},"url":'${LOGINURL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":6,"estimatedTime":-1}],"see":false}]" | tee androiddata
-
-echo ""
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${LOGINURL}',"st":${ST},"et":${ET}, \
+"hrc":200,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 gzip -c androiddata > androiddata.gz
 
-
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -372,24 +370,23 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',
-"mth":"onCreate","icm":false},"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731",
-"cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":'${COLLECTOREVENT}',"st":${ST},
-"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":"Activity Change"},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},
-"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},
-"url":'${ITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),
-"sst":"f","bts":[{"btId":${ITEMSALLBT},"time":3,"estimatedTime":2}],"see":false},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"timer",
-"dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"timerName":
-"Login","metricValues":[1442333460716,1442333465726]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"timer","dm":"unknown",
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"timerName":
-"UserLoginTask","metricValues":[1442333460835,1442333465190]}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7",  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},  \
+"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7"  \
+,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7",  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ec":${COLLECTOREVENT},"url":'${ITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
+"bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
 echo ""
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -417,27 +414,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown",
-"cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":
-{"cls":${COLLECTORITEMPARSERACTIVITY},"mth":"parse","icm":false},"args":['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><items><product><id>1<\/id>
-<title>A Clockwork Orange<\/title><imagePath>images\/A_Clockwork_Orange-Anthony_Burgess.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>2<\/id><title>The Goldfinch: A Novel<\/title>
-<imagePath>images\/goldfinch.jpg<\/imagePath><price>16.75<\/price><\/product><product><id>3<\/id><title>Personal<\/title><imagePath>images\/personal.jpg<\/imagePath><price>16.95<\/price><\/product>
-<product><id>4<\/id><title>Farewell To Arms<\/title><imagePath>images\/Farewell_To_Arms-Ernest_Hemingway.jpg<\/imagePath><price>10.95<\/price><\/product><product><id>5<\/id><title>Freakonomics<\/title>
-<imagePath>images\/Freakonomics-Stephen_Levitt.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>6<\/id><title>Driven From Within<\/title>
-<imagePath>images\/Jordan-Driven_From_Within.jpg<\/imagePath><price>10.25<\/price><\/product><product><id>7<\/id><title>Sacred Hoops<\/title><imagePath>images\/Sacred_Hoops-Phil_Jackson.jpg<\/imagePath>
-<price>14.95<\/price><\/product><product><id>8<\/id><title>Shantaram<\/title><imagePath>images\/Shantaram-Gregory_David_Roberts.jpg<\/imagePath><price>12.75<\/price><\/product><product><id>9<\/id>
-<title>The Fist Of God<\/title><imagePath>images\/The_Fist_Of_God-Forsyth.jpg<\/imagePath><price>10.65<\/price><\/product><product><id>10<\/id><title>The Godfather<\/title>
-<imagePath>images\/The_Godfather-Mario_Puzo.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>11<\/id><title>The Lost City Of Z<\/title>
-<imagePath>images\/The_Lost_City_Of_Z-David_Grann.jpg<\/imagePath><price>5.5<\/price><\/product><product><id>12<\/id><title>The Tourist<\/title><imagePath>images\/The_Tourist-Olen_Steinhauer.jpg<\/imagePath><price>6.95<\/price>
-<\/product><product><id>13<\/id><title>Unbroken<\/title><imagePath>images\/unbroken.jpg<\/imagePath><price>26.95<\/price><\/product><\/items>'],"ret":"not-evaluated"},
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"timer","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"timerName":"GetRequestService","metricValues":[1442333467359,1442333469203]}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7", \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID}, \
+"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMPARSERACTIVITY}',"mth":"parse","icm":false}, \
+"args":['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><items><product><id>1<\/id><title>A Clockwork Orange<\/title><imagePath>images\/A_Clockwork_Orange-Anthony_Burgess.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>2<\/id><title>The Goldfinch: A Novel<\/title><imagePath>images\/goldfinch.jpg<\/imagePath><price>16.75<\/price><\/product><product><id>3<\/id><title>Personal<\/title><imagePath>images\/personal.jpg<\/imagePath><price>16.95<\/price><\/product><product><id>4<\/id><title>Farewell To Arms<\/title><imagePath>images\/Farewell_To_Arms-Ernest_Hemingway.jpg<\/imagePath><price>10.95<\/price><\/product><product><id>5<\/id><title>Freakonomics<\/title><imagePath>images\/Freakonomics-Stephen_Levitt.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>6<\/id><title>Driven From Within<\/title><imagePath>images\/Jordan-Driven_From_Within.jpg<\/imagePath><price>10.25<\/price><\/product><product><id>7<\/id><title>Sacred Hoops<\/title><imagePath>images\/Sacred_Hoops-Phil_Jackson.jpg<\/imagePath><price>14.95<\/price><\/product><product><id>8<\/id><title>Shantaram<\/title><imagePath>images\/Shantaram-Gregory_David_Roberts.jpg<\/imagePath><price>12.75<\/price><\/product><product><id>9<\/id><title>The Fist Of God<\/title><imagePath>images\/The_Fist_Of_God-Forsyth.jpg<\/imagePath><price>10.65<\/price><\/product><product><id>10<\/id><title>The Godfather<\/title><imagePath>images\/The_Godfather-Mario_Puzo.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>11<\/id><title>The Lost City Of Z<\/title><imagePath>images\/The_Lost_City_Of_Z-David_Grann.jpg<\/imagePath><price>5.5<\/price><\/product><product><id>12<\/id><title>The Tourist<\/title><imagePath>images\/The_Tourist-Olen_Steinhauer.jpg<\/imagePath><price>6.95<\/price><\/product><product><id>13<\/id><title>Unbroken<\/title><imagePath>images\/unbroken.jpg<\/imagePath><price>26.95<\/price><\/product><\/items>'],"ret":"not-evaluated"}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -462,15 +449,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE1URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE1URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -495,15 +484,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE2URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE2URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -528,15 +519,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE3URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE3URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -561,15 +554,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE4URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE4URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -595,15 +590,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE5URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE5URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -628,15 +625,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE6URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE6URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -662,15 +661,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE7URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE7URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -695,15 +696,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE8URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE8URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -728,15 +731,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE9URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE9URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -761,15 +766,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE10URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE10URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -794,15 +801,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE11URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE11URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -827,15 +836,17 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE12URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE12URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -860,15 +871,56 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE13URL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE13URL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+--data-binary "@androiddata.gz" ${COLLECTORURL}
+
+rm -f -r androiddata
+rm -f -r androiddata.gz
+
+sleep 1
+
+#COLLECTOR - ACTIVITY CHANGE
+echo ""
+echo "COLLECTOR - ACTIVITY CHANGE"
+echo ""
+
+TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
+
+let "COLLECTOREVENT++"
+
+ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
+ST+="000"
+echo ${ST}
+
+ET=$(date +%s)
+ET+="000"
+echo ${ET}
+
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"mid":{"cls":'${COLLECTORITEMDETAILACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"activity":'${COLLECTORITEMDETAILACTIVITY}',"event":'Activity Change'}]" | tee androiddata
+
+echo " "
+
+gzip -c androiddata > androiddata.gz
+
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -925,20 +977,26 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo  "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',
-"mth":"onCreate","icm":false},"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731",
-"cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},
-"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":"Activity Change"},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},
-"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},
-"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET},"hrc":204,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${CARTBT},"time":1013,
-"estimatedTime":1018}],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":"unknown", \
+"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
+"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
+"dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
+"hrc":204,"crg":$(uuidgen),"sst":"f", \
+"bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -991,17 +1049,18 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${CHECKOUTURL}',"st":${ST},"et":${ET},"hrc":200,
-"crg":${UUID},"sst":"f","bts":[{"btId":"669","time":20191,"estimatedTime":10104}],"see":false},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},
-"type":"timer","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"timerName":"Checkout","metricValues":[1442333529810,1442333556141]}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
+"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${CHECKOUTURL}', \
+"st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
+"bts":[{"btId":${CHECKOUTBT},"time":257,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 echo ""
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
@@ -1048,20 +1107,26 @@ ET=$(date +%s)
 ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',
-"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',
-"mth":"onCreate","icm":false},"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731",
-"cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET},
-"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":"Activity Change"},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},
-"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":${CARRIER},"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},
-"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET},"hrc":204,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${DELETECARTBT},"time":1013,
-"estimatedTime":1018}],"see":false}]" | tee androiddata
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":"unknown", \
+"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
+"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
+"dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
+"hrc":204,"crg":$(uuidgen),"sst":"f", \
+"bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
-echo ""
+echo " "
 
 gzip -c androiddata > androiddata.gz
 
-curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: iOS" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
+curl -is --trace-ascii "-" -H "User-Agent: ${USERAGENT}" -H "osn: Android" -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" \
+-H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@androiddata.gz" ${COLLECTORURL}
 
 rm -f -r androiddata
