@@ -261,6 +261,35 @@ do
   echo "${VERSION}"
   echo "${CARRIER}"
 
+  #OS version
+  DEV[0]="Asus"
+  DEV[1]="Nexus"
+  DEV[2]="Moto"
+  DEV[3]="Sony"
+  DEV[4]="Samsung"
+  DEV[5]="HTC"
+  DEV[6]="LG"
+
+  RANDOMOSPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
+  echo ${RANDOMOSPER}
+  if [ "$RANDOMOSPER" -le "30" ]; then
+    DEVICE=${DEV[0]}
+  elif [ "$RANDOMOSPER" -ge "31" ] && [ "$RANDOMOSPER" -le "35" ]; then
+    DEVICE=${DEV[1]}
+  elif [ "$RANDOMOSPER" -ge "41" ] && [ "$RANDOMOSPER" -le "50" ]; then
+    DEVICE=${DEV[2]}
+  elif [ "$RANDOMOSPER" -ge "51" ] && [ "$RANDOMOSPER" -le "60" ]; then
+    DEVICE=${DEV[3]}
+  elif [ "$RANDOMOSPER" -ge "61" ] && [ "$RANDOMOSPER" -le "70" ]; then
+    DEVICE=${DEV[4]}
+  elif [ "$RANDOMOSPER" -ge "71" ] && [ "$RANDOMOSPER" -le "80" ]; then
+    DEVICE=${DEV[5]}
+  elif [ "$RANDOMOSPER" -ge "81" ] && [ "$RANDOMOSPER" -le "100" ]; then
+    DEVICE=${DEV[6]}
+  fi
+
+  echo "${DEVICE}"
+
   sleep 1
 
 #Login URL
@@ -299,14 +328,12 @@ echo ""
 TIMEDIFF=$(( RANDOM % (5000 - 10 + 1 ) + 10 ))
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${LOGINURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -363,20 +390,18 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7",  \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},  \
-"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7"  \
+"args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7"  \
 ,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown","dmo":"sdk_phone_armv7",  \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"url":'${ITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
@@ -407,14 +432,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown","dmo":"sdk_phone_armv7", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID}, \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMPARSERACTIVITY}',"mth":"parse","icm":false}, \
 "args":['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><items><product><id>1<\/id><title>A Clockwork Orange<\/title><imagePath>images\/A_Clockwork_Orange-Anthony_Burgess.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>2<\/id><title>The Goldfinch: A Novel<\/title><imagePath>images\/goldfinch.jpg<\/imagePath><price>16.75<\/price><\/product><product><id>3<\/id><title>Personal<\/title><imagePath>images\/personal.jpg<\/imagePath><price>16.95<\/price><\/product><product><id>4<\/id><title>Farewell To Arms<\/title><imagePath>images\/Farewell_To_Arms-Ernest_Hemingway.jpg<\/imagePath><price>10.95<\/price><\/product><product><id>5<\/id><title>Freakonomics<\/title><imagePath>images\/Freakonomics-Stephen_Levitt.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>6<\/id><title>Driven From Within<\/title><imagePath>images\/Jordan-Driven_From_Within.jpg<\/imagePath><price>10.25<\/price><\/product><product><id>7<\/id><title>Sacred Hoops<\/title><imagePath>images\/Sacred_Hoops-Phil_Jackson.jpg<\/imagePath><price>14.95<\/price><\/product><product><id>8<\/id><title>Shantaram<\/title><imagePath>images\/Shantaram-Gregory_David_Roberts.jpg<\/imagePath><price>12.75<\/price><\/product><product><id>9<\/id><title>The Fist Of God<\/title><imagePath>images\/The_Fist_Of_God-Forsyth.jpg<\/imagePath><price>10.65<\/price><\/product><product><id>10<\/id><title>The Godfather<\/title><imagePath>images\/The_Godfather-Mario_Puzo.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>11<\/id><title>The Lost City Of Z<\/title><imagePath>images\/The_Lost_City_Of_Z-David_Grann.jpg<\/imagePath><price>5.5<\/price><\/product><product><id>12<\/id><title>The Tourist<\/title><imagePath>images\/The_Tourist-Olen_Steinhauer.jpg<\/imagePath><price>6.95<\/price><\/product><product><id>13<\/id><title>Unbroken<\/title><imagePath>images\/unbroken.jpg<\/imagePath><price>26.95<\/price><\/product><\/items>'],"ret":"not-evaluated"}]" | tee androiddata
@@ -442,14 +465,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE1URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -477,14 +498,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE2URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -512,14 +531,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE3URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -547,14 +564,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE4URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -583,14 +598,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE5URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -618,14 +631,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE6URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -654,14 +665,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE7URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -689,14 +698,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE8URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -724,14 +731,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE9URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -759,14 +764,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE10URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -794,14 +797,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE11URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -829,14 +830,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE12URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -864,14 +863,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE13URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
@@ -899,18 +896,16 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMDETAILACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "activity":'${COLLECTORITEMDETAILACTIVITY}',"event":'Activity Change'}]" | tee androiddata
@@ -970,23 +965,21 @@ COLLECTORRT=$(echo "`date +%s` - 10"| bc)
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
 "dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
-"dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":204,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -1042,14 +1035,12 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
 "bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${CHECKOUTURL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
@@ -1100,23 +1091,21 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-ST+="000"
 echo ${ST}
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
-echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":"unknown", \
+echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
 "dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
-{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":"unknown","dmo":"sdk_phone_armv7", \
+{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
-"dm":"unknown","dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":204,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata

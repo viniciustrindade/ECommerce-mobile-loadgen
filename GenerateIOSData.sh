@@ -1135,7 +1135,7 @@ echo "[{
   "ec" : ${COLLECTOREVENT},
   "see" : false,
   "mv" : ${VERSION},
-  "et" : "1442106236239",
+  "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
   "url" : '${ADDITEMSTOCARTURL}',
