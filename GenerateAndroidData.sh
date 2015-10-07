@@ -4,6 +4,7 @@ PASSWORD=appdynamics
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
 URL=
 COLLECTOR_URL=
+COLLECTORKEY=
 LOGINURL=${URL}
 LOGINURL+=/appdynamicspilot/rest/user
 ITEMSALLURL=${URL}
@@ -41,7 +42,6 @@ COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
 COLLECTORBID=7502603c73d32b0706f359bc8cfd1762
 COLLECTORAN=com.appdynamics.pmdemoapps.android.ECommerceAndroid
-COLLECTORKEY=DEMO-AAB-AXA
 COLLECTOREVENT=1
 COLLECTORAGENTVERSION=4.1.4.0
 COLLECTORAB=bd7bfaab131f9ead6cf916905f927f3e57cc38c2
@@ -335,7 +335,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${LOGINURL}',"st":${ST},"et":${ET}, \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 gzip -c androiddata > androiddata.gz
@@ -403,7 +403,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
-"ec":${COLLECTOREVENT},"url":'${ITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
+"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
 echo ""
@@ -472,7 +472,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE1URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -505,7 +505,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE2URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -538,7 +538,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE3URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -571,7 +571,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE4URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -605,7 +605,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE5URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -638,7 +638,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE6URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -672,7 +672,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE7URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -705,7 +705,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE8URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -738,7 +738,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE9URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -771,7 +771,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE10URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -804,7 +804,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE11URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -837,7 +837,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE12URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -870,7 +870,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${IMAGE13URL}', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -980,8 +980,8 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
-"hrc":204,"crg":$(uuidgen),"sst":"f", \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
+"hrc":200,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 echo " "
@@ -1042,7 +1042,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
-"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${CHECKOUTURL}', \
+"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
 "st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CHECKOUTBT},"time":257,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
@@ -1106,8 +1106,8 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url":'${ADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
-"hrc":204,"crg":$(uuidgen),"sst":"f", \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
+"hrc":200,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 echo " "

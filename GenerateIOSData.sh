@@ -2,9 +2,9 @@
 USERNAME=test
 PASSWORD=appdynamics
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
-COLLECTORKEY=DEMO-AAB-AXA
 URL=
 COLLECTOR_URL=
+COLLECTORKEY=
 LOGINURL=${URL}
 LOGINURL+=/appdynamicspilot/rest/user
 ITEMSALLURL=${URL}
@@ -42,7 +42,6 @@ COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
 COLLECTORBID=81a9d6f577463cca8d8f0720e279d007
 COLLECTORAN=com.appdynamics.ECommerce-iOS
-
 COLLECTOREVENT=1015
 COLLECTORAGENTVERSION=4.1.0.0
 COLLECTORAB=3861444463b35dce6e4b16e930e05a39ebc4a323
@@ -318,7 +317,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${LOGINURL}',
+  "url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -337,7 +336,7 @@ echo "[{
       "btId" : ${USERLOGINBT}
     }
   ],
-  "hrc" : 204,
+  "hrc" : 200,
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "crg" : $(uuidgen)
 }]" | tee data
@@ -378,7 +377,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${LOGINURL}',
+  "url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -397,7 +396,7 @@ echo "[{
       "btId" : ${USERLOGINBT}
     }
   ],
-  "ne"  : 'Internal Server ERROR',
+  "ne"  : 'kCFURLErrorCannotConnectToHost',
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "crg" : $(uuidgen)
 }]" | tee data
@@ -464,7 +463,7 @@ echo "[{
   "mv" : ${VERSION},
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
-  "url" : '${ITEMSALLURL}',
+  "url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -526,7 +525,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE1URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -571,7 +570,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE2URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -616,7 +615,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE3URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -661,7 +660,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE4URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -707,7 +706,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE5URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -752,7 +751,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE6URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -798,7 +797,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE7URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -843,7 +842,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE8URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -888,7 +887,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE9URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -933,7 +932,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE10URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -978,7 +977,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE11URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1023,7 +1022,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE12URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1068,7 +1067,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : '${IMAGE13URL}',
+  "url" : 'www.ecommerce.com',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1138,10 +1137,10 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${ADDITEMSTOCARTURL}',
+  "url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
-"geo" : '${COUNTRYNAME}',
+  "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
   "ct" : "WIFI",
@@ -1158,7 +1157,7 @@ echo "[{
       "btId" : ${CARTBT}
     }
   ],
-  "hrc" : 204,
+  "hrc" : 200,
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "crg" : $(uuidgen)
 },{
@@ -1237,7 +1236,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${CHECKOUTURL}',
+"url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -1256,7 +1255,7 @@ echo "[{
       "btId" : ${CHECKOUTBT}
     }
   ],
-  "hrc" : 204,
+  "hrc" : 200,
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "crg" : ${UUID}
 }]" | tee data
@@ -1312,7 +1311,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${ADDITEMSTOCARTURL}',
+"url" : 'www.ecommerce.com',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -1331,7 +1330,7 @@ echo "[{
       "btId" : ${DELETECARTBT}
     }
   ],
-  "hrc" : 204,
+  "hrc" : 200,
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "crg" : $(uuidgen)
 }]" | tee data
