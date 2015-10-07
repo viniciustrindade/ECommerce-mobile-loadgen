@@ -1,3 +1,5 @@
+#!/bin/bash
+
 while sleep 600;
 
 do
@@ -6,9 +8,9 @@ echo "CRASH DATA REPORT"
 echo " "
 
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
-URL=
-COLLECTOR_URL=
-COLLECTORKEY=
+URL=ECOMM_URL
+COLLECTOR_URL=EUM_KEY
+COLLECTORKEY=EUM_KEY
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
 COLLECTORBID=66ce9cb5a13f7436fb21b39c6c6c8fb7
