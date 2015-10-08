@@ -5,6 +5,7 @@ USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
 URL=
 COLLECTOR_URL=
 COLLECTORKEY=
+ECOMMERCEURL=www.ecommerce.com
 LOGINURL=${URL}
 LOGINURL+=/appdynamicspilot/rest/user
 ITEMSALLURL=${URL}
@@ -37,6 +38,39 @@ IMAGE13URL=${URL}
 IMAGE13URL+=/appdynamicspilot/images/unbroken.jpg
 CARTURL=${URL}
 CARTURL+=/appdynamicspilot/rest/cart/
+
+ECOMMERCELOGINURL=${ECOMMERCEURL}
+ECOMMERCELOGINURL+=/appdynamicspilot/rest/user
+ECOMMERCEITEMSALLURL=${ECOMMERCEURL}
+ECOMMERCEITEMSALLURL+=/appdynamicspilot/rest/items/all
+ECOMMERCEIMAGE1URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE1URL+=/appdynamicspilot/images/A_Clockwork_Orange-Anthony_Burgess.jpg
+ECOMMERCEIMAGE2URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE2URL+=/appdynamicspilot/images/goldfinch.jpg
+ECOMMERCEIMAGE3URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE3URL+=/appdynamicspilot/images/personal.jpg
+ECOMMERCEIMAGE4URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE4URL+=/appdynamicspilot/images/Farewell_To_Arms-Ernest_Hemingway.jpg
+ECOMMERCEIMAGE5URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE5URL+=/appdynamicspilot/images/Freakonomics-Stephen_Levitt.jpg
+ECOMMERCEIMAGE6URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE6URL+=/appdynamicspilot/images/Jordan-Driven_From_Within.jpg
+ECOMMERCEIMAGE7URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE7URL+=/appdynamicspilot/images/Sacred_Hoops-Phil_Jackson.jpg
+ECOMMERCEIMAGE8URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE8URL+=/appdynamicspilot/images/Shantaram-Gregory_David_Roberts.jpg
+ECOMMERCEIMAGE9URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE9URL+=/appdynamicspilot/images/The_Fist_Of_God-Forsyth.jpg
+ECOMMERCEIMAGE10URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE10URL+=/appdynamicspilot/images/The_Godfather-Mario_Puzo.jpg
+ECOMMERCEIMAGE11URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE11URL+=/appdynamicspilot/images/The_Lost_City_Of_Z-David_Grann.jpg
+ECOMMERCEIMAGE12URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE12URL+=/appdynamicspilot/images/The_Tourist-Olen_Steinhauer.jpg
+ECOMMERCEIMAGE13URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE13URL+=/appdynamicspilot/images/unbroken.jpg
+ECOMMERCECARTURL=${ECOMMERCEURL}
+ECOMMERCECARTURL+=/appdynamicspilot/rest/cart/
 
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
@@ -335,7 +369,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCELOGINURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 gzip -c androiddata > androiddata.gz
@@ -403,7 +437,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
-"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
+"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
 echo ""
@@ -472,7 +506,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE1URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -505,7 +539,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE2URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -538,7 +572,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE3URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -571,7 +605,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE4URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -605,7 +639,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE5URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -638,7 +672,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE6URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -672,7 +706,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE7URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -705,7 +739,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE8URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -738,7 +772,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE9URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -771,7 +805,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE10URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -804,7 +838,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE11URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -837,7 +871,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAG124URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -870,7 +904,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE13URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -936,6 +970,9 @@ CARTCOOKIE+=.route2
 ADDITEMSTOCARTURL=${CARTURL}
 ADDITEMSTOCARTURL+=${CARTITEM}
 
+ECOMMERCEADDITEMSTOCARTURL=${ECOMMERCECARTURL}
+ECOMMERCEADDITEMSTOCARTURL+=${CARTITEM}
+
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -980,7 +1017,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
@@ -1004,6 +1041,10 @@ echo ""
 
 CHECKOUTURL=${CARTURL}
 CHECKOUTURL+=co
+
+ECOMMERCECHECKOUTURL=${ECOMMERCECARTURL}
+ECOMMERCECHECKOUTURL+=co
+
 echo ${CHECKOUTURL}
 shopt -s extglob # Required to trim whitespace; see below
 
@@ -1042,7 +1083,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
-"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com', \
+"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCECHECKOUTURL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CHECKOUTBT},"time":257,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
@@ -1106,7 +1147,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : 'www.ecommerce.com',"st":${ST},"et":${ET}, \
+"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":$(uuidgen),"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
