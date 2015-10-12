@@ -1,10 +1,11 @@
-#! /bin/bash
+#!/bin/bash
 USERNAME=test
 PASSWORD=appdynamics
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
 URL=ECOMM_URL
 COLLECTOR_URL=EUM_URL
 COLLECTORKEY=EUM_KEY
+ECOMMERCEURL=www.ecommerce.com
 LOGINURL=${URL}
 LOGINURL+=/appdynamicspilot/rest/user
 ITEMSALLURL=${URL}
@@ -37,6 +38,39 @@ IMAGE13URL=${URL}
 IMAGE13URL+=/appdynamicspilot/images/unbroken.jpg
 CARTURL=${URL}
 CARTURL+=/appdynamicspilot/rest/cart/
+
+ECOMMERCELOGINURL=${ECOMMERCEURL}
+ECOMMERCELOGINURL+=/appdynamicspilot/rest/user
+ECOMMERCEITEMSALLURL=${ECOMMERCEURL}
+ECOMMERCEITEMSALLURL+=/appdynamicspilot/rest/items/all
+ECOMMERCEIMAGE1URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE1URL+=/appdynamicspilot/images/A_Clockwork_Orange-Anthony_Burgess.jpg
+ECOMMERCEIMAGE2URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE2URL+=/appdynamicspilot/images/goldfinch.jpg
+ECOMMERCEIMAGE3URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE3URL+=/appdynamicspilot/images/personal.jpg
+ECOMMERCEIMAGE4URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE4URL+=/appdynamicspilot/images/Farewell_To_Arms-Ernest_Hemingway.jpg
+ECOMMERCEIMAGE5URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE5URL+=/appdynamicspilot/images/Freakonomics-Stephen_Levitt.jpg
+ECOMMERCEIMAGE6URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE6URL+=/appdynamicspilot/images/Jordan-Driven_From_Within.jpg
+ECOMMERCEIMAGE7URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE7URL+=/appdynamicspilot/images/Sacred_Hoops-Phil_Jackson.jpg
+ECOMMERCEIMAGE8URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE8URL+=/appdynamicspilot/images/Shantaram-Gregory_David_Roberts.jpg
+ECOMMERCEIMAGE9URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE9URL+=/appdynamicspilot/images/The_Fist_Of_God-Forsyth.jpg
+ECOMMERCEIMAGE10URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE10URL+=/appdynamicspilot/images/The_Godfather-Mario_Puzo.jpg
+ECOMMERCEIMAGE11URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE11URL+=/appdynamicspilot/images/The_Lost_City_Of_Z-David_Grann.jpg
+ECOMMERCEIMAGE12URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE12URL+=/appdynamicspilot/images/The_Tourist-Olen_Steinhauer.jpg
+ECOMMERCEIMAGE13URL=${ECOMMERCEURL}
+ECOMMERCEIMAGE13URL+=/appdynamicspilot/images/unbroken.jpg
+ECOMMERCECARTURL=${ECOMMERCEURL}
+ECOMMERCECARTURL+=/appdynamicspilot/rest/cart/
 
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2
@@ -317,7 +351,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCELOGINURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -377,7 +411,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCELOGINURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -463,7 +497,7 @@ echo "[{
   "mv" : ${VERSION},
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEITEMSALLURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -525,7 +559,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE1URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -570,7 +604,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE2URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -615,7 +649,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE3URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -660,7 +694,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE4URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -706,7 +740,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE5URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -751,7 +785,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE6URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -797,7 +831,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE7URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -842,7 +876,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE8URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -887,7 +921,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE9URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -932,7 +966,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE10URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -977,7 +1011,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE11URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1022,7 +1056,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE12URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1067,7 +1101,7 @@ echo "[{
   "tm" : "-2048",
   "cc" : "8",
   "ab" : ${COLLECTORAB},
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEIMAGE13URL}',
   "crg" : $(uuidgen),
   "see" : false,
   "hrc" : 200,
@@ -1100,6 +1134,9 @@ CARTCOOKIE+=.route2
 
 ADDITEMSTOCARTURL=${CARTURL}
 ADDITEMSTOCARTURL+=${CARTITEM}
+
+ECOMMERCEADDITEMSTOCARTURL=${ECOMMERCECARTURL}
+ECOMMERCEADDITEMSTOCARTURL+=${CARTITEM}
 
 shopt -s extglob # Required to trim whitespace; see below
 
@@ -1137,7 +1174,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCEADDITEMSTOCARTURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -1198,6 +1235,9 @@ echo ""
 
 CHECKOUTURL=${CARTURL}
 CHECKOUTURL+=co
+ECOMMERCECHECKOUTURL=${ECOMMERCECARTURL}
+ECOMMERCECHECKOUTURL+=co
+
 echo ${CHECKOUTURL}
 shopt -s extglob # Required to trim whitespace; see below
 
@@ -1236,7 +1276,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-"url" : 'www.ecommerce.com',
+  "url" : '${ECOMMERCECHECKOUTURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -1311,7 +1351,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-"url" : 'www.ecommerce.com',
+"url" : '${ECOMMERCEADDITEMSTOCARTURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
