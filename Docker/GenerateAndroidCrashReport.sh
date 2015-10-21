@@ -9,7 +9,7 @@ echo " "
 
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
 URL=ECOMM_URL
-COLLECTOR_URL=EUM_KEY
+COLLECTOR_URL=EUM_URL
 COLLECTORKEY=EUM_KEY
 COLLECTORURL=${COLLECTOR_URL}
 COLLECTORURL+=/eumcollector/mobileMetrics?version=2

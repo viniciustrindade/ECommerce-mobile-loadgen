@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 USERNAME=test
 PASSWORD=appdynamics
 USERAGENT="Ecommerce Mobile Application/1.0 CFNetwork/711.2.23 Darwin/13.4.0"
