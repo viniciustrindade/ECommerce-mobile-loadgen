@@ -313,9 +313,6 @@ echo ""
 echo "POST LOGIN URL"
 echo ""
 
-ST=$(date +%s)
-echo ${ST}
-
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -326,8 +323,6 @@ while IFS=':' read key value; do
       USERLOGINCOOKIE="$value"
     elif [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
-    elif [[ "$key" = "ADRUM_0" ]]; then
-      CLIENTID="$value"
     fi
 done < <(curl -i -H "ADRUM_1: isMobile:true" -H "Content-Type: application/x-www-form-urlencoded" -H "Cookie: ROUTEID=.route2" -H "ADRUM: isAjax:true" \
 -H "User-Agent: ${USERAGENT}" --data "username=${USERNAME}&password=${PASSWORD}"  ${LOGINURL})
@@ -335,8 +330,6 @@ USERLOGINBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
 echo $USERLOGINBT
 USERLOGINJSESSION=$(echo $USERLOGINCOOKIE | awk -F'=' '{print $2}')
 SESSIONID=$(echo $USERLOGINJSESSION | awk -F'.' '{print $1}')
-UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
-echo $UUID
 
 sleep 1
 
@@ -378,8 +371,8 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st":${ST}
-  "crg":${UUID}
+  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "crg" : $(uuidgen)
 }]" | tee data
 
 echo ""
@@ -405,7 +398,7 @@ echo ""
 echo "COLLECTOR - ERRORMESSAGE"
 echo ""
 
-TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 10 ))
+TIMEDIFF=$(( RANDOM % (5000 - 10 + 1 ) + 10 ))
 
 #echo $(( RANDOM % (5 - 1 + 1 ) + 1 ))
 #if [[ $(( RANDOM % (5 - 1 + 1 ) + 1 )) = 1 ]]; then
@@ -464,9 +457,6 @@ echo ""
 echo "GET - ITEMS ALL"
 echo ""
 
-ST=$(date +%s)
-echo ${ST}
-
 ITEMSALLCOOKIE=JSESSIONID=
 ITEMSALLCOOKIE+=${SESSIONID}
 ITEMSALLCOOKIE+=.route2
@@ -480,15 +470,11 @@ while IFS=':' read key value; do
     value=${value##+([[:space:]])}; value=${value%%+([[:space:]])}
     if [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
-    elif [[ "$key" = "ADRUM_0" ]]; then
-      CLIENTID="$value"
     fi
 done < <(curl -i -b -H "ADRUM_1: isMobile:true" -H "Cookie: ROUTEID=.route2" -H "ADRUM: isAjax:true" -H "ADRUM: isAjax:true" -H "Cookie:${ITEMSALLCOOKIE}" -H "ADRUM: isAjax:true" \
 -H "User-Agent: ${USERAGENT}" ${ITEMSALLURL})
 ITEMSALLBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
 echo ${ITEMSALLBT}
-UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
-echo $UUID
 
 sleep 1
 
@@ -531,8 +517,8 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st":${ST}
-  "crg":${UUID}
+  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "crg" : $(uuidgen)
 }]" | tee data
 
 echo ""
@@ -1142,6 +1128,7 @@ echo "GET - ADD ITEMS TO CART"
 echo ""
 
 ST=$(date +%s)
+ST+="000"
 echo ${ST}
 
 CARTITEM=$(( RANDOM % (13 - 1 + 1 ) + 1 ))
@@ -1187,12 +1174,16 @@ COLLECTORRT=$(echo "`date +%s` - 10"| bc)
 
 let "COLLECTOREVENT++"
 
+ET=$(date +%s)
+ET+="000"
+echo ${ET}
+
 echo "[{
   "av" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
   "see" : false,
   "mv" : ${VERSION},
-  "et" : $(date +%s),
+  "et" : ${ET},
   "dmo" : '${IPHONE}',
   "sst" : "f",
   "url" : '${ECOMMERCEADDITEMSTOCARTURL}',
@@ -1216,10 +1207,10 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st":${ST}
-  "crg":${UUID}
+  "st" : ${ST},
+  "crg" : ${UUID}
 },{
-  "st":${ST}
+  "st" : ${ST},
   "cf" : "-1994",
   "type" : "ui",
   "osv" : ${OSVERSION},
@@ -1255,6 +1246,7 @@ echo "GET - CHECKOUT"
 echo ""
 
 ST=$(date +%s)
+ST+="000"
 echo ${ST}
 
 CHECKOUTURL=${CARTURL}
@@ -1292,12 +1284,16 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
 let "COLLECTOREVENT++"
 
+ET=$(date +%s)
+ET+="000"
+echo ${ET}
+
 echo "[{
   "av" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
   "see" : false,
   "mv" : ${VERSION},
-  "et" : $(date +%s),
+  "et" : ${ET},
   "dmo" : '${IPHONE}',
   "sst" : "f",
   "url" : '${ECOMMERCECHECKOUTURL}',
@@ -1320,7 +1316,7 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st":${ST}
+  "st" : ${ST},
   "crg" : ${UUID}
 }]" | tee data
 
@@ -1342,9 +1338,6 @@ echo ""
 echo "DELETE - ITEMS FROM CART"
 echo ""
 
-ST=$(date +%s)
-echo ${ST}
-
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -1352,15 +1345,11 @@ while IFS=':' read key value; do
     value=${value##+([[:space:]])}; value=${value%%+([[:space:]])}
     if [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
-    elif [[ "$key" = "ADRUM_0" ]]; then
-      CLIENTID="$value"
     fi
 done < <(curl -i -H "User-Agent: ${USERAGENT}" -H "appdynamicssnapshotenabled: true" -H "JSESSIONID:${CARTCOOKIE}" -H "USERNAME: ${USERNAME}" -H "ADRUM: isAjax:true" -H "ROUTEID: .route2" -H "Cookie:${ITEMSALLCOOKIE}" -H "ADRUM_1: isMobile:true" \
 -H "User-Agent: ${USERAGENT}" -X "DELETE" ${ADDITEMSTOCARTURL})
 DELETECARTBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
 echo $DELETECARTBT
-UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
-echo $UUID
 
 sleep 1
 
@@ -1382,7 +1371,7 @@ echo "[{
   "et" : $(date +%s),
   "dmo" : '${IPHONE}',
   "sst" : "f",
-  "url" : '${ECOMMERCEADDITEMSTOCARTURL}',
+"url" : '${ECOMMERCEADDITEMSTOCARTURL}',
   "type" : "network-request",
   "osv" : ${OSVERSION},
   "geo" : '${COUNTRYNAME}',
@@ -1402,8 +1391,8 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st":${ST}
-  "crg":${UUID}
+  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "crg" : $(uuidgen)
 }]" | tee data
 
 echo ""
