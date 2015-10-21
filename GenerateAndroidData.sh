@@ -331,6 +331,9 @@ echo ""
 echo "POST LOGIN URL"
 echo ""
 
+ST=$(date +%s)
+echo ${ST}
+
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -341,6 +344,8 @@ while IFS=':' read key value; do
       USERLOGINCOOKIE="$value"
     elif [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
+    elif [[ "$key" = "ADRUM_0" ]]; then
+      CLIENTID="$value"
     fi
 done < <(curl -i -H "ADRUM_1: isMobile:true" -H "Content-Type: application/x-www-form-urlencoded" -H "Cookie: ROUTEID=.route2" -H "ADRUM: isAjax:true" \
 -H "User-Agent: ${USERAGENT}" --data "username=${USERNAME}&password=${PASSWORD}"  ${LOGINURL})
@@ -348,6 +353,8 @@ USERLOGINBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
 echo $USERLOGINBT
 USERLOGINJSESSION=$(echo $USERLOGINCOOKIE | awk -F'=' '{print $2}')
 SESSIONID=$(echo $USERLOGINJSESSION | awk -F'.' '{print $1}')
+UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
+echo $UUID
 
 sleep 1
 
@@ -359,10 +366,7 @@ echo ""
 echo "COLLECTOR - LOGIN URL"
 echo ""
 
-TIMEDIFF=$(( RANDOM % (5000 - 10 + 1 ) + 10 ))
-
-ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-echo ${ST}
+TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
 ET=$(date +%s)
 echo ${ET}
@@ -370,7 +374,7 @@ echo ${ET}
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCELOGINURL}',"st":${ST},"et":${ET}, \
-"hrc":200,"crg":$(uuidgen),"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
+"hrc":200,"crg":${UUID},"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 gzip -c androiddata > androiddata.gz
 
@@ -390,6 +394,9 @@ echo ""
 echo "GET - ITEMS ALL"
 echo ""
 
+ST=$(date +%s)
+echo ${ST}
+
 ITEMSALLCOOKIE=JSESSIONID=
 ITEMSALLCOOKIE+=${SESSIONID}
 ITEMSALLCOOKIE+=.route2
@@ -403,10 +410,14 @@ while IFS=':' read key value; do
     value=${value##+([[:space:]])}; value=${value%%+([[:space:]])}
     if [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
+    elif [[ "$key" = "ADRUM_0" ]]; then
+      CLIENTID="$value"
     fi
 done < <(curl -i -b -H "ADRUM_1: isMobile:true" -H "Cookie: ROUTEID=.route2" -H "ADRUM: isAjax:true" -H "ADRUM: isAjax:true" -H "Cookie:${ITEMSALLCOOKIE}" -H "ADRUM: isAjax:true" \
 -H "User-Agent: ${USERAGENT}" ${ITEMSALLURL})
 ITEMSALLBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
+UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
+echo $UUID
 echo ${ITEMSALLBT}
 
 sleep 1
@@ -423,9 +434,6 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
 let "COLLECTOREVENT++"
 
-ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-echo ${ST}
-
 ET=$(date +%s)
 echo ${ET}
 
@@ -437,7 +445,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
-"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"sst":"f",  \
+"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
 echo ""
@@ -962,7 +970,10 @@ echo ""
 echo "GET - ADD ITEMS TO CART"
 echo ""
 
-CARTITEM=$(( RANDOM % (13 - 1 + 1 ) + 1 ))
+TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
+
+ST=$(date +%s)
+echo ${ST}
 
 CARTCOOKIE+=${SESSIONID}
 CARTCOOKIE+=.route2
@@ -980,10 +991,14 @@ while IFS=':' read key value; do
     value=${value##+([[:space:]])}; value=${value%%+([[:space:]])}
     if [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
+    elif [[ "$key" = "ADRUM_0" ]]; then
+      CLIENTID="$value"
     fi
 done < <(curl -i -b -H "User-Agent: ${USERAGENT}" -H "appdynamicssnapshotenabled: true" -H "JSESSIONID:${CARTCOOKIE}" -H "USERNAME: ${USERNAME}" -H "ADRUM: isAjax:true" -H "ROUTEID: .route2" -H "Cookie:${ITEMSALLCOOKIE}" -H "ADRUM_1: isMobile:true" \
 -H "User-Agent: ${USERAGENT}" ${ADDITEMSTOCARTURL})
 CARTBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
+UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
+echo $UUID
 echo $CARTBT
 
 sleep 1
@@ -1001,9 +1016,6 @@ COLLECTORRT=$(echo "`date +%s` - 10"| bc)
 
 let "COLLECTOREVENT++"
 
-ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-echo ${ST}
-
 ET=$(date +%s)
 echo ${ET}
 
@@ -1018,7 +1030,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
-"hrc":200,"crg":$(uuidgen),"sst":"f", \
+"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 echo " "
@@ -1038,6 +1050,9 @@ sleep 1
 echo ""
 echo "GET - CHECKOUT"
 echo ""
+
+ST=$(date +%s)
+echo ${ST}
 
 CHECKOUTURL=${CARTURL}
 CHECKOUTURL+=co
@@ -1075,9 +1090,6 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
 let "COLLECTOREVENT++"
 
-ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-echo ${ST}
-
 ET=$(date +%s)
 echo ${ET}
 
@@ -1108,15 +1120,22 @@ echo ""
 
 shopt -s extglob # Required to trim whitespace; see below
 
+ST=$(date +%s)
+echo ${ST}
+
 while IFS=':' read key value; do
     # trim whitespace in "value"
     value=${value##+([[:space:]])}; value=${value%%+([[:space:]])}
     if [[ "$key" = "ADRUM_1" ]]; then
       USERLOGINADRUM1="$value"
+    elif [[ "$key" = "ADRUM_0" ]]; then
+      CLIENTID="$value"
     fi
 done < <(curl -i -H "User-Agent: ${USERAGENT}" -H "appdynamicssnapshotenabled: true" -H "JSESSIONID:${CARTCOOKIE}" -H "USERNAME: ${USERNAME}" -H "ADRUM: isAjax:true" -H "ROUTEID: .route2" -H "Cookie:${ITEMSALLCOOKIE}" -H "ADRUM_1: isMobile:true" \
 -H "User-Agent: ${USERAGENT}" -X "DELETE" ${ADDITEMSTOCARTURL})
 DELETECARTBT=$(echo $USERLOGINADRUM1 | awk -F':' '{print $2}')
+UUID=$(echo $CLIENTID | awk -F':' '{print $2}')
+echo $UUID
 echo $DELETECARTBT
 
 sleep 1
@@ -1130,9 +1149,6 @@ echo ""
 TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
 let "COLLECTOREVENT++"
-
-ST=$(echo "`date +%s` - ${TIMEDIFF}"| bc)
-echo ${ST}
 
 ET=$(date +%s)
 echo ${ET}
@@ -1148,7 +1164,7 @@ echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORA
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
-"hrc":200,"crg":$(uuidgen),"sst":"f", \
+"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 echo " "
