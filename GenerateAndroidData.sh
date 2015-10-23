@@ -324,6 +324,23 @@ do
 
   echo "${DEVICE}"
 
+  #Connection Type
+  ct[2]="WIFI"
+  ct[0]="4g"
+  ct[1]="3g"
+
+  RANDOMVERSIONPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
+  echo ${RANDOMVERSIONPER}
+  if [ "$RANDOMVERSIONPER" -le "50" ]; then
+    CONNTYPE=${ct[0]}
+  elif [ "$RANDOMVERSIONPER" -ge "51" ] && [ "$RANDOMVERSIONPER" -le "80" ]; then
+    CONNTYPE=${ct[1]}
+  elif [ "$RANDOMVERSIONPER" -ge "81" ] && [ "$RANDOMVERSIONPER" -le "100" ]; then
+    CONNTYPE=${ct[2]}
+  fi
+
+  echo "${CONNTYPE}"
+
   sleep 1
 
 #Login URL
@@ -375,7 +392,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCELOGINURL}',"st":${ST},"et":${ET}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCELOGINURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
 gzip -c androiddata > androiddata.gz
@@ -443,13 +460,13 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},  \
 "args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7"  \
-,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"url" : '${ECOMMERCEITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
@@ -487,7 +504,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID}, \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID}, \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMPARSERACTIVITY}',"mth":"parse","icm":false}, \
 "args":['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><items><product><id>1<\/id><title>A Clockwork Orange<\/title><imagePath>images\/A_Clockwork_Orange-Anthony_Burgess.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>2<\/id><title>The Goldfinch: A Novel<\/title><imagePath>images\/goldfinch.jpg<\/imagePath><price>16.75<\/price><\/product><product><id>3<\/id><title>Personal<\/title><imagePath>images\/personal.jpg<\/imagePath><price>16.95<\/price><\/product><product><id>4<\/id><title>Farewell To Arms<\/title><imagePath>images\/Farewell_To_Arms-Ernest_Hemingway.jpg<\/imagePath><price>10.95<\/price><\/product><product><id>5<\/id><title>Freakonomics<\/title><imagePath>images\/Freakonomics-Stephen_Levitt.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>6<\/id><title>Driven From Within<\/title><imagePath>images\/Jordan-Driven_From_Within.jpg<\/imagePath><price>10.25<\/price><\/product><product><id>7<\/id><title>Sacred Hoops<\/title><imagePath>images\/Sacred_Hoops-Phil_Jackson.jpg<\/imagePath><price>14.95<\/price><\/product><product><id>8<\/id><title>Shantaram<\/title><imagePath>images\/Shantaram-Gregory_David_Roberts.jpg<\/imagePath><price>12.75<\/price><\/product><product><id>9<\/id><title>The Fist Of God<\/title><imagePath>images\/The_Fist_Of_God-Forsyth.jpg<\/imagePath><price>10.65<\/price><\/product><product><id>10<\/id><title>The Godfather<\/title><imagePath>images\/The_Godfather-Mario_Puzo.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>11<\/id><title>The Lost City Of Z<\/title><imagePath>images\/The_Lost_City_Of_Z-David_Grann.jpg<\/imagePath><price>5.5<\/price><\/product><product><id>12<\/id><title>The Tourist<\/title><imagePath>images\/The_Tourist-Olen_Steinhauer.jpg<\/imagePath><price>6.95<\/price><\/product><product><id>13<\/id><title>Unbroken<\/title><imagePath>images\/unbroken.jpg<\/imagePath><price>26.95<\/price><\/product><\/items>'],"ret":"not-evaluated"}]" | tee androiddata
 
@@ -521,7 +538,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE1URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE1URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -554,7 +571,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE2URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE2URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -587,7 +604,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE3URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE3URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -620,7 +637,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE4URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE4URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -654,7 +671,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE5URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE5URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -687,7 +704,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE6URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE6URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -721,7 +738,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE7URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE7URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -754,7 +771,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE8URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE8URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -787,7 +804,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE9URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE9URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -820,7 +837,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE10URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE10URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -853,7 +870,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE11URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE11URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -886,7 +903,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAG124URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAG124URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -919,7 +936,7 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE13URL}', \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE13URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
 echo " "
@@ -952,11 +969,11 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE}, \
 "dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMDETAILACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
-"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"ca":'${CARRIER}',"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "activity":'${COLLECTORITEMDETAILACTIVITY}',"event":'Activity Change'}]" | tee androiddata
 
 echo " "
@@ -1030,15 +1047,15 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
 "dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
@@ -1105,7 +1122,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":'${CONNTYPE}', \
 "bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCECHECKOUTURL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CHECKOUTBT},"time":257,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -1168,15 +1185,15 @@ echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
 "dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
 "ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
 

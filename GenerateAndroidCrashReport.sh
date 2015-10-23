@@ -272,9 +272,28 @@ fi
 
 echo "${DEVICE}"
 
+#Connection Type
+ct[2]="WIFI"
+ct[0]="4g"
+ct[1]="3g"
+
+RANDOMVERSIONPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
+echo ${RANDOMVERSIONPER}
+if [ "$RANDOMVERSIONPER" -le "50" ]; then
+  CONNTYPE=${ct[0]}
+elif [ "$RANDOMVERSIONPER" -ge "51" ] && [ "$RANDOMVERSIONPER" -le "80" ]; then
+  CONNTYPE=${ct[1]}
+elif [ "$RANDOMVERSIONPER" -ge "81" ] && [ "$RANDOMVERSIONPER" -le "100" ]; then
+  CONNTYPE=${ct[2]}
+fi
+
+echo "${CONNTYPE}"
+
+RANDOMUSERS=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
+
 echo "[{"type":"crash-report","ec":${COLLECTOREVENT},"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB}, \
 "dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
-"ct":"4g","bid":${COLLECTORBID},"androidCrashReport":{"stackTrace":{"exceptionClassName":'java.lang.IllegalStateException', \
+"ct":'${CONNTYPE}',"bid":${COLLECTORBID},"androidCrashReport":{"stackTrace":{"exceptionClassName":'java.lang.IllegalStateException', \
 "message":'Could not execute method of the activity',"cause":{'exceptionClassName':'java.lang.reflect.InvocationTargetException', \
 "message":'',"cause":{'exceptionClassName':'java.lang.NullPointerException', \
 "message":'Attempt to invoke virtual method boolean java.lang.String.equals java.lang.Object on a null object reference', \
@@ -310,7 +329,7 @@ echo ""
 
 gzip -c crash > crash.gz
 
-curl -is --trace-ascii "-" -H "mat: 1441134000000" -H "id: cf2797c2-71db-4676-9221-d83edd708edb" -H "User-Agent: ${USERAGENT}" -H "osn: Android" \
+curl -is --trace-ascii "-" -H "di" : "${RANDOMUSERS}" -H "mat: 1441134000000" -H "id: cf2797c2-71db-4676-9221-d83edd708edb" -H "User-Agent: ${USERAGENT}" -H "osn: Android" \
 -H "bid: ${COLLECTORBID}" -H "an: ${COLLECTORAN}" -H "ky: ${COLLECTORKEY}" -H "Content-Type: application/x-www-form-urlencoded" \
 -H "Accept-Encoding: gzip, deflate" \
 --data-binary "@crash.gz" ${COLLECTORURL}

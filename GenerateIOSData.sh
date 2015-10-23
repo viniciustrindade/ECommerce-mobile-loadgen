@@ -306,6 +306,23 @@ echo "${IPHONE}"
   echo "${VERSION}"
   echo "${CARRIER}"
 
+  #Connection Type
+  ct[2]="WIFI"
+  ct[0]="4g"
+  ct[1]="3g"
+
+  RANDOMVERSIONPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
+  echo ${RANDOMVERSIONPER}
+  if [ "$RANDOMVERSIONPER" -le "50" ]; then
+    CONNTYPE=${ct[0]}
+  elif [ "$RANDOMVERSIONPER" -ge "51" ] && [ "$RANDOMVERSIONPER" -le "80" ]; then
+    CONNTYPE=${ct[1]}
+  elif [ "$RANDOMVERSIONPER" -ge "81" ] && [ "$RANDOMVERSIONPER" -le "100" ]; then
+    CONNTYPE=${ct[2]}
+  fi
+
+  echo "${CONNTYPE}"
+
   sleep 1
 
 #Login URL
@@ -362,7 +379,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
@@ -422,7 +439,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
@@ -513,7 +530,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
@@ -564,7 +581,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -609,7 +626,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -654,7 +671,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -699,7 +716,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -745,7 +762,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -790,7 +807,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -836,7 +853,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -881,7 +898,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -926,7 +943,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -971,7 +988,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -1016,7 +1033,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -1061,7 +1078,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -1106,7 +1123,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
   "ec" : ${COLLECTOREVENT},
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "tm" : "-2048",
   "cc" : "8",
@@ -1186,7 +1203,6 @@ COLLECTORRT=$(echo "`date +%s` - 10"| bc)
 let "COLLECTOREVENT++"
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
 echo "[{
@@ -1203,7 +1219,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
@@ -1297,7 +1313,6 @@ TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 let "COLLECTOREVENT++"
 
 ET=$(date +%s)
-ET+="000"
 echo ${ET}
 
 echo "[{
@@ -1314,7 +1329,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
@@ -1394,7 +1409,7 @@ echo "[{
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
-  "ct" : "WIFI",
+  "ct":'${CONNTYPE}',
   "ca" : '${CARRIER}',
   "agv" : ${COLLECTORAGENTVERSION},
   "ab" : ${COLLECTORAB},
