@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while sleep 600;
+while sleep 50;
 
 do
 

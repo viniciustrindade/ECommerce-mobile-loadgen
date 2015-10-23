@@ -313,6 +313,11 @@ echo ""
 echo "POST LOGIN URL"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
+ST=$(date +%s)
+ST=$((ST-RANDOMST))
+echo ${ST}
+
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -353,7 +358,7 @@ echo "[{
   "sst" : "f",
   "url" : '${ECOMMERCELOGINURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -371,7 +376,7 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "st" : ${ST},
   "crg" : $(uuidgen)
 }]" | tee data
 
@@ -413,7 +418,7 @@ echo "[{
   "sst" : "f",
   "url" : '${ECOMMERCELOGINURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -457,6 +462,11 @@ echo ""
 echo "GET - ITEMS ALL"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
+ST=$(date +%s)
+ST=$((ST-RANDOMST))
+echo ${ST}
+
 ITEMSALLCOOKIE=JSESSIONID=
 ITEMSALLCOOKIE+=${SESSIONID}
 ITEMSALLCOOKIE+=.route2
@@ -499,7 +509,7 @@ echo "[{
   "dmo" : '${IPHONE}',
   "url" : '${ECOMMERCEITEMSALLURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -517,7 +527,7 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "st" : ${ST},
   "crg" : $(uuidgen)
 }]" | tee data
 
@@ -549,7 +559,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -594,7 +604,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -639,7 +649,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -684,7 +694,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -730,7 +740,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -775,7 +785,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -821,7 +831,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -866,7 +876,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -911,7 +921,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -956,7 +966,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -1001,7 +1011,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -1046,7 +1056,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -1091,7 +1101,7 @@ echo "[{
   "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
   "cf" : "-1994",
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -1127,8 +1137,9 @@ echo ""
 echo "GET - ADD ITEMS TO CART"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
-ST+="000"
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 CARTITEM=$(( RANDOM % (13 - 1 + 1 ) + 1 ))
@@ -1188,7 +1199,7 @@ echo "[{
   "sst" : "f",
   "url" : '${ECOMMERCEADDITEMSTOCARTURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -1213,7 +1224,7 @@ echo "[{
   "st" : ${ST},
   "cf" : "-1994",
   "type" : "ui",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "dmo" : '${IPHONE}',
   "mv" : ${VERSION},
@@ -1245,8 +1256,9 @@ echo ""
 echo "GET - CHECKOUT"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
-ST+="000"
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 CHECKOUTURL=${CARTURL}
@@ -1298,7 +1310,7 @@ echo "[{
   "sst" : "f",
   "url" : '${ECOMMERCECHECKOUTURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -1338,6 +1350,11 @@ echo ""
 echo "DELETE - ITEMS FROM CART"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
+ST=$(date +%s)
+ST=$((ST-RANDOMST))
+echo ${ST}
+
 shopt -s extglob # Required to trim whitespace; see below
 
 while IFS=':' read key value; do
@@ -1373,7 +1390,7 @@ echo "[{
   "sst" : "f",
 "url" : '${ECOMMERCEADDITEMSTOCARTURL}',
   "type" : "network-request",
-  "osv" : ${OSVERSION},
+  "osv" : '${OSVERSION}',
   "geo" : '${COUNTRYNAME}',
   "cc" : "8",
   "tm" : "-2048",
@@ -1391,7 +1408,7 @@ echo "[{
     }
   ],
   "hrc" : 200,
-  "st" : $(echo "`date +%s` - ${TIMEDIFF}"| bc),
+  "st" : ${ST},
   "crg" : $(uuidgen)
 }]" | tee data
 

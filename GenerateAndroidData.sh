@@ -244,37 +244,37 @@ do
   fi
 
 
-  #OS version
-  os[0]="5.1"
-  os[1]="4.4"
-  os[2]="4.1"
-  os[3]="4.0"
-  os[4]="4.1"
-  os[5]="4.4"
-  os[6]="5.1"
-  os[7]="5.1"
+  #ANDROID version
+  android[0]="5.1"
+  android[1]="4.4"
+  android[2]="4.1"
+  android[3]="4.0"
+  android[4]="4.1"
+  android[5]="4.4"
+  android[6]="5.1"
+  android[7]="5.1"
 
   RANDOMOSPER=$(( RANDOM % (100 - 1 + 1 ) + 1 ))
   echo ${RANDOMOSPER}
   if [ "$RANDOMOSPER" -le "30" ]; then
-    OSVERSION=${os[0]}
+    ANDROIDVERSION=${android[0]}
   elif [ "$RANDOMOSPER" -ge "31" ] && [ "$RANDOMOSPER" -le "35" ]; then
-    OSVERSION=${os[1]}
+    ANDROIDVERSION=${android[1]}
   elif [ "$RANDOMOSPER" -ge "41" ] && [ "$RANDOMOSPER" -le "50" ]; then
-    OSVERSION=${os[2]}
+    ANDROIDVERSION=${android[2]}
   elif [ "$RANDOMOSPER" -ge "51" ] && [ "$RANDOMOSPER" -le "60" ]; then
-    OSVERSION=${os[3]}
+    ANDROIDVERSION=${android[3]}
   elif [ "$RANDOMOSPER" -ge "61" ] && [ "$RANDOMOSPER" -le "70" ]; then
-    OSVERSION=${os[4]}
+    ANDROIDVERSION=${android[4]}
   elif [ "$RANDOMOSPER" -ge "71" ] && [ "$RANDOMOSPER" -le "80" ]; then
-    OSVERSION=${os[5]}
+    ANDROIDVERSION=${android[5]}
   elif [ "$RANDOMOSPER" -ge "81" ] && [ "$RANDOMOSPER" -le "90" ]; then
-    OSVERSION=${os[6]}
+    ANDROIDVERSION=${android[6]}
   elif [ "$RANDOMOSPER" -ge "91" ] && [ "$RANDOMOSPER" -le "100" ]; then
-    OSVERSION=${os[7]}
+    ANDROIDVERSION=${android[7]}
   fi
 
-  echo "${OSVERSION}"
+  echo "${ANDROIDVERSION}"
 
   #Mobile version
   ver[2]="1.0"
@@ -331,7 +331,9 @@ echo ""
 echo "POST LOGIN URL"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 shopt -s extglob # Required to trim whitespace; see below
@@ -372,7 +374,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCELOGINURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f","bts":[{"btId":${USERLOGINBT},"time":5,"estimatedTime":-1}],"see":false}]" | tee androiddata
 
@@ -387,14 +389,17 @@ rm -f -r androiddata.gz
 
 fi
 
-sleep 1
+sleep 3
+
 
 #Items all
 echo ""
 echo "GET - ITEMS ALL"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 ITEMSALLCOOKIE=JSESSIONID=
@@ -438,13 +443,13 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},  \
 "args":[null]},{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7"  \
-,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+,"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"st":${ST},"activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'App Start'},  \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE},"dmo":"sdk_phone_armv7",  \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},  \
 "ec":${COLLECTOREVENT},"url" : '${ECOMMERCEITEMSALLURL}',"st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f",  \
 "bts":[{"btId":${ITEMSALLBT},"time":5,"estimatedTime":1662}],"see":false}]" | tee androiddata
 
@@ -463,6 +468,8 @@ fi
 
 sleep 1
 
+
+
 #COLLECTOR - REQUEST SERVICE
 
 echo ""
@@ -480,7 +487,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID}, \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID}, \
 "ec":${COLLECTOREVENT},"st":${ST},"et":${ET},"mid":{"cls":'${COLLECTORITEMPARSERACTIVITY}',"mth":"parse","icm":false}, \
 "args":['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><items><product><id>1<\/id><title>A Clockwork Orange<\/title><imagePath>images\/A_Clockwork_Orange-Anthony_Burgess.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>2<\/id><title>The Goldfinch: A Novel<\/title><imagePath>images\/goldfinch.jpg<\/imagePath><price>16.75<\/price><\/product><product><id>3<\/id><title>Personal<\/title><imagePath>images\/personal.jpg<\/imagePath><price>16.95<\/price><\/product><product><id>4<\/id><title>Farewell To Arms<\/title><imagePath>images\/Farewell_To_Arms-Ernest_Hemingway.jpg<\/imagePath><price>10.95<\/price><\/product><product><id>5<\/id><title>Freakonomics<\/title><imagePath>images\/Freakonomics-Stephen_Levitt.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>6<\/id><title>Driven From Within<\/title><imagePath>images\/Jordan-Driven_From_Within.jpg<\/imagePath><price>10.25<\/price><\/product><product><id>7<\/id><title>Sacred Hoops<\/title><imagePath>images\/Sacred_Hoops-Phil_Jackson.jpg<\/imagePath><price>14.95<\/price><\/product><product><id>8<\/id><title>Shantaram<\/title><imagePath>images\/Shantaram-Gregory_David_Roberts.jpg<\/imagePath><price>12.75<\/price><\/product><product><id>9<\/id><title>The Fist Of God<\/title><imagePath>images\/The_Fist_Of_God-Forsyth.jpg<\/imagePath><price>10.65<\/price><\/product><product><id>10<\/id><title>The Godfather<\/title><imagePath>images\/The_Godfather-Mario_Puzo.jpg<\/imagePath><price>5.95<\/price><\/product><product><id>11<\/id><title>The Lost City Of Z<\/title><imagePath>images\/The_Lost_City_Of_Z-David_Grann.jpg<\/imagePath><price>5.5<\/price><\/product><product><id>12<\/id><title>The Tourist<\/title><imagePath>images\/The_Tourist-Olen_Steinhauer.jpg<\/imagePath><price>6.95<\/price><\/product><product><id>13<\/id><title>Unbroken<\/title><imagePath>images\/unbroken.jpg<\/imagePath><price>26.95<\/price><\/product><\/items>'],"ret":"not-evaluated"}]" | tee androiddata
 
@@ -513,7 +520,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE1URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -546,7 +553,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE2URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -579,7 +586,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE3URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -612,7 +619,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE4URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -646,7 +653,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE5URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -679,7 +686,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE6URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -713,7 +720,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE7URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -746,7 +753,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE8URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -779,7 +786,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE9URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -812,7 +819,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE10URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -845,7 +852,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE11URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -878,7 +885,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAG124URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -911,7 +918,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEIMAGE13URL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":$(uuidgen),"bts":[],"see":false}]" | tee androiddata
 
@@ -944,11 +951,11 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"method-call","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMDETAILACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}', \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}', \
 "ca":'${CARRIER}',"ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "activity":'${COLLECTORITEMDETAILACTIVITY}',"event":'Activity Change'}]" | tee androiddata
 
@@ -972,7 +979,9 @@ echo ""
 
 TIMEDIFF=$(( RANDOM % (60 - 1 + 1 ) + 1 ))
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 CARTCOOKIE+=${SESSIONID}
@@ -1020,15 +1029,15 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
-"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
-"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -1051,7 +1060,9 @@ echo ""
 echo "GET - CHECKOUT"
 echo ""
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 CHECKOUTURL=${CARTURL}
@@ -1094,7 +1105,7 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request","dm":${DEVICE}, \
-"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
+"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}',"ct":"4g", \
 "bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCECHECKOUTURL}', \
 "st":${ST},"et":${ET},"hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${CHECKOUTBT},"time":257,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -1120,7 +1131,9 @@ echo ""
 
 shopt -s extglob # Required to trim whitespace; see below
 
+RANDOMST=$(( RANDOM % (200 - 10 + 10 ) + 10 ))
 ST=$(date +%s)
+ST=$((ST-RANDOMST))
 echo ${ST}
 
 while IFS=':' read key value; do
@@ -1154,15 +1167,15 @@ ET=$(date +%s)
 echo ${ET}
 
 echo "[{"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":'method-call',"dm":${DEVICE}, \
-"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dmo":'sdk_phone_armv7',"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST},"et":${ET}, \
 "mid":{"cls":'${COLLECTORITEMSLISTACTIVITY}',"mth":"onCreate","icm":false},"args":[null]}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"ui","dm":${DEVICE},"dmo":"sdk_phone_armv7", \
-"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"st":${ST}, \
 "activity":'${COLLECTORITEMSLISTACTIVITY}',"event":'Activity Change'}, \
 {"avi":1,"av":${VERSION},"agv":${COLLECTORAGENTVERSION},"ab":${COLLECTORAB},"type":"network-request", \
-"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":${OSVERSION},"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
+"dm":${DEVICE},"dmo":"sdk_phone_armv7","ds":541,"tm":"731","cf":"Unknown","cc":1,"osv":'${ANDROIDVERSION}',"geo":'${COUNTRYNAME}',"ca":'${CARRIER}', \
 "ct":"4g","bid":${COLLECTORBID},"ec":${COLLECTOREVENT},"url" : '${ECOMMERCEADDITEMSTOCARTURL}',"st":${ST},"et":${ET}, \
 "hrc":200,"crg":${UUID},"sst":"f", \
 "bts":[{"btId":${DELETECARTBT},"time":1028,"estimatedTime":-1}],"see":false}]" | tee androiddata
@@ -1179,5 +1192,7 @@ rm -f -r androiddata
 rm -f -r androiddata.gz
 fi
 echo ""
+
+
 
 done
